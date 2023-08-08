@@ -1,0 +1,137 @@
+@use 'colors';
+
+window {
+  // BASE
+  border-radius: 12px;
+  background-color: colors.$mantle;
+
+  .bar {
+    margin: 0 1rem;
+  }
+
+  // POWER CTL
+  .powerctl {
+    margin-left: 0.4rem;
+
+    &__options {
+      margin-top: 4px;
+      margin-left: 1.4rem;
+    }
+  }
+
+  // BATTERY
+  .battery {
+    margin-right: 0.6rem;
+
+    &__inside-circle {
+      background-color: colors.$mantle;
+    }
+    
+    &__circle {
+      color: colors.$blue;
+      background-color: colors.$overlay0;
+    }
+
+    &__text {
+      color: transparent;
+    }
+  }
+
+
+  // TIME
+  .clock {
+    margin-right: 0.4rem;
+
+    &__time, &__date {
+      font-size: 1.65rem;
+      font-weight: 600;
+      font-family: "Comic Mono";
+      color: colors.$text;
+      margin-top: 0.6rem;
+    }
+
+    &__date {
+      margin-left: 1rem;
+    }
+  }
+  
+
+  // VOLUME
+  .volume {
+    &__scale {
+      min-width: 100px;
+    }
+
+    scale trough highlight {
+      background: colors.$mauve;
+      min-height: 10px;
+      border-radius: 20px;
+    }
+  }
+
+
+  // BRIGHTNESS
+  .bright {
+    &__scale {
+      min-width: 100px;
+    }
+
+    scale trough highlight {
+      background: colors.$yellow;
+      min-height: 10px;
+      border-radius: 20px;
+    }
+  }
+
+
+  // NETWORK
+  .net {
+    &__ssid {
+      color: colors.$teal;
+      font-size: 1.2rem;
+      font-family: "Comic Mono";
+      margin-top: 0.6rem;
+    }
+  }
+
+
+  // MUSIC TRACKER
+  .musictracker {
+    &__song-image {
+      margin-top: 1px;
+      border-radius: 9999px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-width: 30px;
+      min-height: 30px;
+    }
+
+    &__song-title {
+      font-size: 1.25rem;
+      color: colors.$text;
+    }
+
+    &__control {
+      margin-top: 3px;
+    }
+  }
+
+
+  // WORKSPACES
+  .workspaces {
+      .workspace-entry {
+        padding: 5px;
+        color: colors.$surface1;
+      } 
+      
+      .occupied {
+        color: colors.$text;
+      }
+
+      .current {
+        color: colors.$mauve;
+      }
+  }
+}
+

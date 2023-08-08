@@ -1,0 +1,30 @@
+[global]
+frame_color = "#89B4FA"
+separator_color= frame
+
+### Text ###
+font = icomoon-feather 16
+
+### Geometry ###
+corner_radius = 10
+offset = 50x35
+height = 400
+width = 400
+
+### Icons ###
+min_icon_size = 60
+max_icon_size = 60
+icon_position = right
+
+[urgency_low]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+
+[urgency_normal]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+
+[urgency_critical]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+frame_color = "#FAB387"

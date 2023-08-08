@@ -1,0 +1,41 @@
+@use 'colors';
+
+window {
+  .calendar-box {
+    .calendar__inner-box {
+      padding: 1.4rem;
+
+      .calendar {
+        border-radius: 15px;
+        border: none;
+        font-size: 1.55rem;
+        font-weight: 700;
+        margin-left: 10px;
+        background-color: colors.$mantle;
+
+        &:selected {
+          color: colors.$mauve;
+          background-color: #2F2B41;
+          font-weight: 800;
+        }
+
+        &:indeterminate {
+          color: colors.$surface0;
+        }
+
+        &.button {
+          color: colors.$mauve;
+        }
+
+        &.header {
+          color: colors.$blue;
+        }
+
+        &.highlight {
+          color: colors.$mauve;
+        }
+
+      }
+    }
+  }
+}

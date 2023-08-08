@@ -1,0 +1,272 @@
+(defwindow bar
+           :monitor 0
+           :stacking "fg"
+           :exclusive true
+           :geometry (geometry :width "1892px"
+                               :height "55px"
+                               :y "15px"
+                               :anchor "top center")
+(bar))
+
+(defwidget bar []
+  (centerbox :class "bar" :orientation "h"
+      (left)
+      (center)
+      (right)
+  )
+)
+
+;; BAR PARTS
+
+(defwidget left []
+  (box :space-evenly false :spacing 20 :halign "start"
+    (powerctl)
+    (workspaces)
+  )
+)
+
+(defwidget center []
+  (box :halign "center"
+    (musictracker)
+  )
+)
+
+(defwidget right []
+  (box :space-evenly false :spacing 20 :halign "end" 
+    (battery)
+    (bright)
+    (volume)
+    (net)
+    (time)
+  )
+)
+
+;; MODULES ;;
+
+
+;; PowerCTL
+(defvar power_reveal false)
+(defwidget powerctl []
+  (box :class "powerctl" :space-evenly false
+    (eventbox :onclick "eww update power_reveal=true && eww open wincloser-bar"
+      (image :path "images/arch.svg"
+             :image-width 25
+             :image-height 25
+      )
+    )
+    (revealer :reveal power_reveal
+              :transition "slideright"
+              :duration "300ms"
+      (box :class "powerctl__options" :valign "center" :spacing 15 :space-evenly false
+        (eventbox :onclick "systemctl poweroff"
+          (image :path "images/poweroff.svg"
+                 :image-width 23
+                 :image-height 23
+                 :tooltip "Apagar")
+        )
+        (eventbox :onclick "systemctl reboot"
+          (image :path "images/reboot.svg"
+                 :image-width 23
+                 :image-height 23
+                 :tooltip "Reiniciar")
+        )
+
+      )
+    )
+  )
+)
+
+;; Hyprland Workspaces
+(defwidget workspaces []
+  (eventbox :class "workspaces"
+    (box :space-evenly true 
+         :spacing 15
+      (label :text "${workspaces}${current_workspace}" 
+             :visible false)
+      (for workspace in workspaces
+        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+          (box :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
+            (label :text "${workspace.id == current_workspace ? "" : ""}")
+          )
+        )
+      )
+    )
+  )
+)
+
+;; Music tracker
+(defvar music_reveal false)
+(defwidget musictracker []
+  (eventbox :onhover "eww update music_reveal=true" 
+            :onhoverlost "eww update music_reveal=false" 
+            :visible "${is_playing == "Stopped" ? "false" : "true"}" 
+    (box :space-evenly false 
+         :spacing 12 
+         :valign "center"
+      (box :class "musictracker__song-image" 
+           :style 'background-image: url("${current_song.image}")'
+      )
+      (eventbox :onclick "eww open wincloser && eww open music-ctl" 
+        (label :class "musictracker__song-title" 
+               :limit-width 35 
+               :wrap true 
+               :text "${current_song.title}"
+        )
+      )
+      (revealer :reveal music_reveal 
+                :transition "slideright" 
+                :duration "300ms"
+        (box :spacing 15 
+          (eventbox :onclick "bash ~/.config/eww/scripts/playerctl-fast.sh previous" 
+                    :timeout "5s"
+            (image :class "musictracker__control" 
+                   :path "images/backward.svg" 
+                   :image-width 20 
+                   :image-height 20
+            )
+          )
+          (eventbox :onclick "bash ~/.config/eww/scripts/playerctl-fast.sh play-pause" 
+                    :timeout "5s"
+            (image :class "musictracker__control" 
+                   :path "${is_playing == "Playing" ? "images/pause.svg" : "images/play.svg"}" 
+                   :image-width 20 :image-height 20
+            )
+          )
+          (eventbox :onclick "bash ~/.config/eww/scripts/playerctl-fast.sh next" 
+                    :timeout "5s"
+            (image :class "musictracker__control" 
+                   :path "images/forward.svg" 
+                   :image-width 20 
+                   :image-height 20
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+;; Timedate
+(defpoll clock_time :interval "1s" "date '+\%H:\%M'")
+(defpoll clock_date :interval "5s" "date '+\%d/\%m/\%Y'")
+(defvar date_reveal false)
+(defwidget time[] 
+  (eventbox :onhover "eww update date_reveal=true" :onhoverlost "eww update date_reveal=false" 
+    (box :class "clock" 
+         :space-evenly false 
+      (label :class "clock__time" 
+             :text "| ${clock_time}"
+      )
+      (revealer :reveal date_reveal 
+                :transition "slideright" 
+                :duration "300ms"
+        (eventbox :onclick "eww open wincloser && eww open calwindow"
+          (label :class "clock__date" 
+                 :text "- ${clock_date}"
+          )
+        )
+      )
+    )
+  )
+)
+
+;; Volume
+(defvar volume_reveal false)
+(defwidget volume[]
+  (box :tooltip "Volumen: ${volume}"
+    (eventbox :onhover "eww update volume_reveal=true" 
+              :onhoverlost "eww update volume_reveal=false"
+      (box :class "volume" 
+           :space-evenly false 
+           :spacing 8
+        (image :path "${volume <= 30 ? "images/volume-muted.svg" : volume >= 90 ? "images/volume-high.svg" : "images/volume-low.svg"}" 
+               :image-width 25
+               :image-height 25
+        )
+        (revealer :reveal volume_reveal 
+                  :transition "slideright" 
+                  :duration "300ms"
+          (scale :class "volume__scale" 
+                 :min 30 :max 140 
+                 :value "${volume}"
+                 :onchange "bash ~/.config/eww/scripts/set-volume.sh {}"
+          )
+        )
+      )
+    )
+  )
+)
+
+;; Brightness
+(defvar bright_reveal false)
+(defwidget bright[]
+  (box :tooltip "Brillo: ${brightness}"
+    (eventbox 
+      :onhover "eww update bright_reveal=true" 
+      :onhoverlost "eww update bright_reveal=false"
+      (box :class "bright" 
+           :space-evenly false 
+           :spacing 8
+        (image :path "images/bright.svg" 
+               :image-width 25 
+               :image-height 25
+        )
+        (revealer :reveal bright_reveal 
+                  :transition "slideright" 
+                  :duration "300ms"
+          (scale :class "bright__scale" 
+                 :min 5 :max 100 
+                 :value "${brightness}" 
+                 :onchange "bash ~/.config/eww/scripts/set-brightness.sh {}"
+          )
+        )
+      )
+    )
+  )
+)
+
+;; Network
+(defvar net_reveal false)
+(defwidget net[]
+  (box :tooltip "${current_ssid != "" ? "Conectado a ${current_ssid}" : "Desconectado"}"
+    (eventbox :onhover "eww update net_reveal=true" 
+              :onhoverlost "eww update net_reveal=false"
+      (box :class "net" 
+           :space-evenly false 
+           :spacing 8
+        (image :path "${wifi_intensity_image}" 
+               :image-width 25 
+               :image-height 25
+        )
+        (revealer :reveal net_reveal 
+                  :transition "slideright" 
+                  :duration "300ms"
+          (label :class "net__ssid" 
+                 :text "${current_ssid}"
+          )
+        )
+      )
+    )
+  )
+)
+
+;; Battery
+(defwidget battery[]
+  (box :class "battery"
+       :space-evenly false
+       :tooltip "Brillo: ${brightness}"
+    (circular-progress
+        :class "battery__circle"
+        :style "${EWW_BATTERY.BAT1.status == "Charging" ? "color: #a6e3a1" : EWW_BATTERY.BAT1.capacity <= 15 ? "color: #eb5959" : ""}" 
+        :value "${EWW_BATTERY.BAT1.capacity}"
+        :thickness 6
+        :start-at 75
+      (box :class "battery__inside-circle"
+           :tooltip "Batería: ${EWW_BATTERY.BAT1.capacity}%"
+        (label :class "battery__text" 
+               :text "battery"
+        )
+      )
+    )
+  ) 
+)

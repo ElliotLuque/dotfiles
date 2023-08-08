@@ -1,0 +1,17 @@
+#!/bin/bash
+
+bus_name="org.mpris.MediaPlayer2.$(playerctl -l | head -n 1)"
+object_path="/org/mpris/MediaPlayer2"
+property_name="PlaybackStatus"
+
+old_playback_status=""
+
+while true; do
+    playback_status=$(qdbus $bus_name $object_path org.mpris.MediaPlayer2.Player.$property_name)
+
+    if [ "$playback_status" != "$old_playback_status" ]; then
+        echo "$playback_status"
+        old_playback_status="$playback_status"
+    fi
+done
+

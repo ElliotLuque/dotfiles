@@ -1,0 +1,36 @@
+(defwindow music-ctl
+           :monitor 0
+           :stacking "fg"
+           :exclusive false
+           :geometry (geometry :width "400px"
+                               :height "190px"
+                               :y "10px"
+                               :anchor "top center")
+(music))
+
+(defwidget music []
+  (box :class "music-ctl"
+    (box :class "music-ctl-container" :halign "start" :valign "center"
+      (box :orientation "vertical" :space-evenly "false" :valign "center" :halign "center"
+        (box :class "music-ctl-image" :style 'background-image: url("${current_song.image}")')
+      )
+      (box :hexpand "false" :vexpand "false" :class "music-ctl-info" :halign "center" :valign "start" :orientation "vertical" :space-evenly "false"
+        (label :class "music-ctl-title" :width "10" :limit-width "17" :height "10" :wrap "true" :text "${current_song.title}")
+        (label :class "music-ctl-artist" :width "10" :limit-width "15" :height "10" :wrap "true" :text "${current_song.artist}")
+        (box :class "music-ctl-controls":spacing "25" :space-evenly "false" :halign "center"
+          (eventbox :onclick "bash ~/.config/eww/scripts/playerctl-fast.sh previous" :timeout "5s"
+            (image :path "images/backward.svg" :image-width "25" :image-height "25")
+          )
+          (eventbox :onclick "bash ~/.config/eww/scripts/playerctl-fast.sh play-pause" :timeout "5s"
+            (image :path "${is_playing == "Playing" ? "images/pause.svg" : "images/play.svg"}" 
+                   :image-width "25" :image-height "25")
+          )
+          (eventbox :onclick "bash ~/.config/eww/scripts/playerctl-fast.sh next" :timeout "5s"
+            (image :path "images/forward.svg" :image-width "25" :image-height "25")
+          )
+        )
+        (scale :onchange "bash ~/.config/eww/scripts/move-position.sh {}" :timeout "5s" :class "song-state" :value "${current_song.position}" :min 0 :max "${current_song.length}")
+      )
+    )
+  )
+)

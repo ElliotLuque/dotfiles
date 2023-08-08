@@ -1,0 +1,17 @@
+;; WINDOW CLOSER
+(include "./modules/wincloser.yuck")
+
+;; BAR
+(include "./modules/bar.yuck")
+(include "./modules/music-ctl.yuck")
+(include "./modules/calendar.yuck")
+
+;; LISTENERS
+(deflisten brightness :initial 100 "bash ~/.config/eww/scripts/get-brightness")
+(deflisten volume :initial 100 "bash ~/.config/eww/scripts/get-volume")
+(deflisten current_workspace :initial 1 "bash ~/.config/eww/scripts/get-active-workspace")
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
+(deflisten current_song :initial "{\"title\":\"\"}" "bash ~/.config/eww/scripts/get-current-song")
+(deflisten is_playing :initial "Paused" "bash ~/.config/eww/scripts/is-playing")
+(deflisten current_ssid :initial "" "bash ~/.config/eww/scripts/get-current-ssid")
+(deflisten wifi_intensity_image :initial "images/no-wifi.svg" "bash ~/.config/eww/scripts/get-wifi-intensity")

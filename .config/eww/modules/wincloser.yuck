@@ -1,0 +1,23 @@
+(defwindow wincloser
+           :monitor 0
+           :exclusive false
+           :stacking "fg"
+           :focusable false
+           :geometry (geometry :width "100%"
+                               :height "100%"
+                               :anchor "center center")
+(closer :window "$(bash ~/.config/eww/scripts/wincloser.sh)"))
+
+(defwindow wincloser-bar
+           :monitor 0
+           :exclusive false
+           :stacking "fg"
+           :focusable false
+           :geometry (geometry :width "100%"
+                               :height "95%"
+                               :anchor "center center")
+(closer :window "$(bash ~/.config/eww/scripts/wincloser.sh)"))
+
+(defwidget closer [window]
+  (eventbox :onclick "eww close ${window} && eww update power_reveal=false")
+)

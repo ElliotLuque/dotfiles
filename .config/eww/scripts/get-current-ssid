@@ -1,0 +1,18 @@
+#!/bin/bash
+
+get_ssid() {
+    nmcli -t -f active,ssid dev wifi | grep sí | cut -d: -f2
+}
+
+old_ssid=""
+
+while true; do
+    new_ssid=$(get_ssid)
+
+    if [[ "$new_ssid" != "$old_ssid" ]]; then
+        old_ssid="$new_ssid"
+        echo "$old_ssid"
+    fi
+
+    sleep 10
+done

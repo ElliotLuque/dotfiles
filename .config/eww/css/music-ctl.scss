@@ -1,0 +1,60 @@
+@use 'colors';
+
+.music-ctl {
+  border-radius: 15px;
+  background-color: colors.$mantle;
+  color: colors.$text;
+
+  scale trough {
+    background-color: colors.$surface0;
+    border-radius: 20px;
+  }
+
+  scale trough highlight {
+    background: colors.$mauve;
+    min-height: 10px;
+    border-radius: 20px;
+  }
+
+  .song-state {
+    margin-top: 2.5rem;
+  }
+
+  &-container  {
+    margin: 1.3rem 1rem;
+  }
+
+  &-info {
+    margin-top: 1.3rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  &-controls {
+    margin-top: 2rem;
+  }
+
+  &-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  &-artist {
+    font-size: 1.15rem;
+    color: colors.$subtext0;
+  }
+
+  &-album {
+    font-size: 1.25rem;
+  }
+
+  &-image {
+    margin: 1rem;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    min-width: 150px;
+    min-height: 150px;
+  }
+}

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+get_signal_strength() {
+    nmcli -t -f active,signal dev wifi | grep sí | cut -d: -f2
+}
+
+convert_to_levels() {
+    local signal_strength=$1
+    if [ $signal_strength -ge 55 ]; then
+        echo "images/wifi-high.svg"
+    elif [ $signal_strength -ge 40 ]; then
+        echo "images/wifi-mid.svg"
+    elif [ $signal_strength -ge 1 ]; then
+        echo "images/wifi-low.svg"
+    else
+        echo "images/no-wifi.svg"
+    fi
+}
+
+current_signal_strength=""
+
+while true; do
+    new_signal_strength=$(get_signal_strength)
+
+    if [[ "$new_signal_strength" != "$current_signal_strength" ]]; then
+        current_signal_strength="$new_signal_strength"
+        echo "$(convert_to_levels $current_signal_strength)"
+    fi
+
+done

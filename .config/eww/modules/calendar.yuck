@@ -1,0 +1,20 @@
+;; Calendar
+(defwindow calwindow
+           :monitor 0
+           :exclusive false
+           :stacking "fg"
+           :geometry (geometry :width "350px"
+                               :height "30px"
+                               :x "15px"
+                               :y "10px"
+                               :anchor "top right")
+(cal))
+
+(defwidget cal []
+  (box :class "calendar-box" :orientation "v" 
+    (box :class "calendar__inner-box" 
+	    (calendar :class "calendar")
+    )
+  )
+)
+
