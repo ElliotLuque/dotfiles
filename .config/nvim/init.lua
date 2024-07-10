@@ -155,6 +155,11 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Enable folding
+vim.opt.foldmethod = 'indent'
+-- Disable folding in Telescope's result window.
+vim.api.nvim_create_autocmd('FileType', { pattern = 'TelescopeResults', command = [[setlocal nofoldenable]] })
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
