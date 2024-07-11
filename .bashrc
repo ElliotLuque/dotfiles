@@ -7,6 +7,7 @@
 
 export PATH="$PATH:/opt/nvim"
 export BAT_THEME="Catppuccin Mocha"
+export EDITOR="nvim"
 
 # Alias
 alias grep='grep --color=auto'
