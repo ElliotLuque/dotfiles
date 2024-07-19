@@ -170,6 +170,12 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Toggle line wrap
 vim.keymap.set('n', '<leader>ww', '<cmd>set wrap!<CR>')
 
+-- Toggle folding
+vim.keymap.set('n', '<leader>ff', '<cmd>set foldenable!<CR>')
+
+-- Make it rain
+vim.keymap.set('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>')
+
 -- Live Server
 vim.keymap.set('n', '<leader>lst', '<cmd>LiveServerStart<CR>')
 vim.keymap.set('n', '<leader>lsd', '<cmd>LiveServerDown<CR>')
@@ -268,6 +274,7 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      current_line_blame = true,
     },
   },
 
