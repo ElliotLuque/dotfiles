@@ -169,6 +169,34 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Toggle line wrap
 vim.keymap.set('n', '<leader>ww', '<cmd>set wrap!<CR>')
 
+vim.o.signcolumn = 'yes:2'
+
+-- Setup signs, relevant
+vim.diagnostic.config {
+  virtual_text = {
+    prefix = '●',
+  },
+  signs = true,
+  update_in_insert = true,
+  underline = true,
+  severity_sort = true,
+  float = {
+    border = 'rounded',
+  },
+}
+
+-- Diagnostic sigsn
+local signs = {
+  { name = 'DiagnosticSignError', text = ' ' },
+  { name = 'DiagnosticSignWarn', text = ' ' },
+  { name = 'DiagnosticSignInfo', text = ' ' },
+  { name = 'DiagnosticSignHint', text = ' ' },
+}
+
+for _, sign in ipairs(signs) do
+  vim.fn.sign_define(sign.name, { text = sign.text, texthl = sign.name, numhl = sign.name })
+end
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
@@ -257,11 +285,12 @@ require('lazy').setup({
     'lewis6991/gitsigns.nvim',
     opts = {
       signs = {
-        add = { text = '+' },
-        change = { text = '~' },
+        add = { text = '┃' },
+        change = { text = '┃' },
         delete = { text = '_' },
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
+        untracked = { text = '┆' },
       },
     },
   },
