@@ -30,3 +30,7 @@ PS1="\[\033[38;5;14m\] λ \w \[\033[38;5;12m\]\[\033[0m\] "
 # Fetch
 export PF_INFO="ascii title os wm editor shell uptime pkgs memory"
 pfetch
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
