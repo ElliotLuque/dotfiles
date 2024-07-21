@@ -115,12 +115,16 @@ vim.opt.showmode = false
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
 
--- Enable break indent
+-- Indent config
 vim.opt.breakindent = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 
--- Change tab size
+-- Tab config
+vim.opt.smarttab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
 
 -- Save undo history
 vim.opt.undofile = true
