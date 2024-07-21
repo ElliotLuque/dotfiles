@@ -179,6 +179,33 @@ vim.keymap.set('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>')
 -- Live Server
 vim.keymap.set('n', '<leader>lst', '<cmd>LiveServerStart<CR>')
 vim.keymap.set('n', '<leader>lsd', '<cmd>LiveServerDown<CR>')
+vim.o.signcolumn = 'yes:2'
+
+-- Setup signs, relevant
+vim.diagnostic.config {
+  virtual_text = {
+    prefix = '●',
+  },
+  signs = true,
+  update_in_insert = true,
+  underline = true,
+  severity_sort = true,
+  float = {
+    border = 'rounded',
+  },
+}
+
+-- Diagnostic signs
+local signs = {
+  { name = 'DiagnosticSignError', text = ' ' },
+  { name = 'DiagnosticSignWarn', text = ' ' },
+  { name = 'DiagnosticSignInfo', text = ' ' },
+  { name = 'DiagnosticSignHint', text = ' ' },
+}
+
+for _, sign in ipairs(signs) do
+  vim.fn.sign_define(sign.name, { text = sign.text, texthl = sign.name, numhl = sign.name })
+end
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -268,11 +295,12 @@ require('lazy').setup({
     'lewis6991/gitsigns.nvim',
     opts = {
       signs = {
-        add = { text = '+' },
-        change = { text = '~' },
+        add = { text = '┃' },
+        change = { text = '┃' },
         delete = { text = '_' },
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
+        untracked = { text = '┆' },
       },
       current_line_blame = true,
     },
