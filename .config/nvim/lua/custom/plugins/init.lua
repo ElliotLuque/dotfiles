@@ -51,7 +51,7 @@ return {
           lualine_y = {
             {
               'filename',
-              path = 1,
+              path = 4,
               icon = { ' ', align = 'left' },
             },
           },
