@@ -52,7 +52,7 @@ return {
             {
               'filename',
               path = 1,
-              -- icon = { '', align = 'right' },
+              icon = { ' ', align = 'left' },
             },
           },
           lualine_z = { 'location' },
