@@ -78,4 +78,5 @@ return {
     -- use opts = {} for passing setup options
     -- this is equalent to setup({}) function
   },
+  { 'eandrju/cellular-automaton.nvim' },
 }

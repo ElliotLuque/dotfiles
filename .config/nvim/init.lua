@@ -169,9 +169,11 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Toggle line wrap
 vim.keymap.set('n', '<leader>ww', '<cmd>set wrap!<CR>')
 
-vim.o.signcolumn = 'yes:2'
+-- Make it rain
+vim.keymap.set('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>')
 
--- Setup signs, relevant
+-- Setup signs
+vim.o.signcolumn = 'yes:2'
 vim.diagnostic.config {
   virtual_text = {
     prefix = '●',
