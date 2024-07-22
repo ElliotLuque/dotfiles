@@ -48,13 +48,7 @@ return {
               'filetype',
             },
           },
-          lualine_y = {
-            {
-              'filename',
-              path = 4,
-              icon = { ' ', align = 'left' },
-            },
-          },
+          lualine_y = {},
           lualine_z = { 'location' },
         },
       }
