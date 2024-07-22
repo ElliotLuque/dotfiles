@@ -393,6 +393,9 @@ require('lazy').setup({
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
+          layout_config = {
+            preview_width = 0.55,
+          },
           mappings = {
             i = { ['<esc>'] = actions.close },
           },
