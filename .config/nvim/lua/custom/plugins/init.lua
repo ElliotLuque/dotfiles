@@ -8,19 +8,53 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('lualine').setup {
+        options = {
+          theme = 'auto',
+          section_separators = { left = '', right = '' },
+        },
         sections = {
-          lualine_a = { 'mode' },
+          lualine_a = {
+            {
+              'mode',
+              icons_enabled = true,
+              icon = { '', align = 'left' },
+            },
+          },
           lualine_b = {
-            'branch',
-            'diff',
+            {
+              'filename',
+              file_status = true,
+              padding = { left = 2, right = 2 },
+            },
+          },
+          lualine_c = {
+            {
+              'branch',
+              icon = { '󰘬', align = 'left' },
+              separator = '',
+            },
+            {
+              'diff',
+              separator = '',
+            },
+          },
+          lualine_x = {
             {
               'diagnostics',
               symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+              separator = '',
+            },
+            {
+              'filetype',
             },
           },
-          lualine_c = { 'filename' },
-          lualine_x = { 'selectioncount' },
-          lualine_y = { 'filetype' },
+          lualine_y = {
+            {
+              'filename',
+              path = 1,
+              -- icon = { '', align = 'right' },
+            },
+          },
           lualine_z = { 'location' },
         },
       }
@@ -92,4 +126,16 @@ return {
     -- this is equalent to setup({}) function
   },
   { 'eandrju/cellular-automaton.nvim' },
+  {
+    'utilyre/barbecue.nvim',
+    name = 'barbecue',
+    version = '*',
+    dependencies = {
+      'SmiteshP/nvim-navic',
+      'nvim-tree/nvim-web-devicons', -- optional dependency
+    },
+    opts = {
+      -- configurations go here
+    },
+  },
 }
