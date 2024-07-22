@@ -10,6 +10,7 @@ export BAT_THEME="Catppuccin Mocha"
 export EDITOR="nvim"
 
 # Alias
+alias gg='lazygit'
 alias grep='grep --color=auto'
 alias mkdir='mkdir -p'
 alias top='btop'
