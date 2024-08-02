@@ -4,4 +4,4 @@ require 'config.autocmds'
 require 'config.options'
 require 'config.diagnostics'
 
-vim.cmd.colorscheme 'catppuccin-mocha'
+vim.cmd.colorscheme 'everforest'
