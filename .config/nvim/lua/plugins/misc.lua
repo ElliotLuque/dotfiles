@@ -1,11 +1,10 @@
 return {
   {
     'tpope/vim-sleuth',
-    event = 'BufReadPost',
   },
   {
     'numToStr/Comment.nvim',
-    event = 'BufReadPost',
+    opts = {},
   },
   {
     'windwp/nvim-autopairs',
