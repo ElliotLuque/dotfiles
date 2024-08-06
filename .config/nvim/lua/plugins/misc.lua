@@ -1,8 +1,5 @@
 return {
   {
-    'tpope/vim-sleuth',
-  },
-  {
     'numToStr/Comment.nvim',
     opts = {},
   },
@@ -37,11 +34,13 @@ return {
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
+    opts = {},
   },
   {
     'kylechui/nvim-surround',
     version = '*',
     event = 'VeryLazy',
+    opts = {},
   },
   {
     'windwp/nvim-ts-autotag',

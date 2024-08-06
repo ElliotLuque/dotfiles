@@ -16,7 +16,7 @@ opt.termguicolors = true
 opt.background = 'dark'
 opt.mouse = 'a'
 opt.list = true
-opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' }
 opt.updatetime = 250
 opt.timeoutlen = 300
 
@@ -29,6 +29,9 @@ opt.undofile = true
 opt.showmode = false
 opt.clipboard = 'unnamedplus'
 opt.expandtab = true
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.softtabstop = 4
 opt.breakindent = true
 opt.autoindent = true
 opt.smartindent = true
